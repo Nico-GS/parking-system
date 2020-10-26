@@ -15,6 +15,9 @@ import com.parkit.parkingsystem.model.Ticket;
 import com.parkit.parkingsystem.util.InputReaderUtil;
 
 
+/**
+ * The type Parking service.
+ */
 public class ParkingService {
 
     private static final FareCalculatorService fareCalculatorService = new FareCalculatorService();
@@ -24,10 +27,17 @@ public class ParkingService {
     private static final Logger LOGGER = LogManager.getLogger("ParkingService");
     private static final String ERROR_PARKED_VHL = "Registration already occupied. Enter a valid registration";
     private static final String ERROR_EXITED_VHL = "Registration already exited. Enter a valid registration";
-    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"); // Format time
-    private static final int RECURRENT_USER = 1; // Recurrent user
-    private static final int DISCOUNT = 5; // Discount
+    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static final int RECURRENT_USER = 1;
+    private static final int DISCOUNT = 5;
 
+    /**
+     * Instantiates a new Parking service.
+     *
+     * @param inputReader    the input reader
+     * @param daoParkingSpot the dao parking spot
+     * @param daoTicket      the dao ticket
+     */
     public ParkingService(final InputReaderUtil inputReader,
                           final ParkingSpotDAO daoParkingSpot, final TicketDAO daoTicket) {
         this.inputReaderUtil = inputReader;
@@ -65,7 +75,7 @@ public class ParkingService {
                 int numberVisitsUser = ticketDAO.checkOldTicket(ticket.getVehicleRegNumber());
                 // user recurrent
                 if (numberVisitsUser >= RECURRENT_USER) { //
-                    LOGGER.info("Congratulations, you are a regular user, reduction of {}% ", DISCOUNT);
+                    LOGGER.info("Regular user, reduction of {}% ", DISCOUNT);
                 }
                 LOGGER.info("Generated Ticket and saved in DB");
                 LOGGER.info("Please park your vehicle in spot number: {}",
@@ -80,6 +90,11 @@ public class ParkingService {
         }
     }
 
+    /**
+     * Get the vehicle registration number
+     *
+     * @return the registration number
+     */
     private String getVehicleRegNumber() {
         LOGGER.info("Please type the vehicle registration number "
                 + "and press enter key");
@@ -87,6 +102,11 @@ public class ParkingService {
     }
 
 
+    /**
+     * Gets parking spot
+     *
+     * @return the next parking number if available
+     */
     public ParkingSpot getNextParkingNumberIfAvailable() {
         int parkingNumber = 0;
         ParkingSpot parkingSpot = null;
@@ -107,7 +127,11 @@ public class ParkingService {
         return parkingSpot;
     }
 
-
+    /**
+     * Get the vehicle type
+     * 1 : Car
+     * 2 : Bike
+     */
     private ParkingType getVehicleType() {
         LOGGER.info("Please select vehicle type from menu");
         LOGGER.info("1 CAR");
@@ -125,6 +149,9 @@ public class ParkingService {
     }
 
 
+    /**
+     * Process exiting vehicle
+     */
     public void processExitingVehicle() {
         try {
             String vehicleRegNumber = getVehicleRegNumber();

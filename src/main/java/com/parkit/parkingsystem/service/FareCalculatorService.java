@@ -20,8 +20,12 @@ public class FareCalculatorService {
     private static final double PERCENT_DISCOUNT_RECURRENT = 0.95; // Pourcentage de réduction user recurrent
     private static final int DISCOUNT_PERCENT_INFO = 5; // Compter ticket user recurrent
 
+
     /**
-     * Calcul prix du ticket pour différentes durées et utilisateurs récurrents
+     * Calcul prix du ticket pour différentes durées, types véhicules et utilisateurs réguliers
+     *
+     * @param ticket        object ticket
+     * @param isRegularUser boolean regular user
      */
     public void calculateFare(final Ticket ticket, final boolean isRegularUser) {
         errorOutTime(ticket);
@@ -69,7 +73,9 @@ public class FareCalculatorService {
     }
 
     /**
-     * Check errors during the exit parking process.
+     * Check errors during the exit parking process
+     *
+     * @param ticket object ticket
      */
     private static void errorOutTime(final Ticket ticket) {
         if ((ticket.getOutTime() == null)) {

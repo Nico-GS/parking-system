@@ -20,6 +20,11 @@ public class ParkingSpotDAO {
     private DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
 
+    /**
+     * Sets data base config.
+     *
+     * @param dbConfig the db config
+     */
     public void setDataBaseConfig(final DataBaseConfig dbConfig) {
         this.dataBaseConfig = dbConfig;
     }

@@ -24,7 +24,6 @@ public class TicketDAO {
     private static final String ERROR_MESSAGE = "Error fetching next available slot";
     private static final int SIX = 6;
 
-
     public void setDataBaseConfig(final DataBaseConfig dbConfig) {
         this.dataBaseConfig = dbConfig;
     }

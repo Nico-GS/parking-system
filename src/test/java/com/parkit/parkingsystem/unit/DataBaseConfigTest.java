@@ -12,6 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * DataBase configuration test
+ */
 public class DataBaseConfigTest {
 
    private static DataBaseConfig dataBaseConfig;

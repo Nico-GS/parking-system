@@ -20,14 +20,17 @@ import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
 
 
+/**
+ * The type Parking data base it.
+ */
 @ExtendWith(MockitoExtension.class)
 public class ParkingDataBaseIT {
 
-   private static DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
+   private static final DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
    private static ParkingSpotDAO parkingSpotDAO;
    private static TicketDAO ticketDAO;
    private static DataBasePrepareService dataBasePrepareService;
-   private static String vehicleRegNumber = "ABCDEF";
+   private static final String vehicleRegNumber = "ABCDEF";
 
    @Mock
    private static InputReaderUtil inputReaderUtil;
@@ -36,7 +39,7 @@ public class ParkingDataBaseIT {
 
    /**
     * Marque une pause d'une demi seconde entre l'entrée et la sortie
-    * @throws InterruptedException
+    * @throws InterruptedException interruption exception
     */
    private synchronized void demiSecond() throws InterruptedException {
       final int HALF_SECOND = 500;
@@ -61,7 +64,7 @@ public class ParkingDataBaseIT {
 
    @Test
    @DisplayName("Vérifie qu'un ticket est bien save en DB et que la table est mise à jour")
-   public void checkIfTicketIsSavedInDB() {
+   public void checkIfTicketIsSavedInDataBaseAndUpdateTable() {
       ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
       parkingService.processIncomingVehicle();
       parkingSpot = parkingService.getNextParkingNumberIfAvailable();
